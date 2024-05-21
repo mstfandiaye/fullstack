@@ -16,6 +16,35 @@ const normalizePort = val => {
     return false;
 };
 
+//define port 
+const port = normalizePort(process.env.PORT || 3000);
+app.set('port', port);
+
+// error manage 
+const errorHandler = error => {
+    if (error.syscall !== 'listen') {
+        throw error;
+    }
+    //get adress server 
+    const adress = server.adress();
+    const bind = typeof adress === 'string' ? 'pipe' + adress : 'port' + port;
+
+    switch (error.code) {
+        case 'EACCES':
+            console.error(bind + 'requires elevated priviligies');
+            process.exit(1);
+            break;
+
+        case 'EADDRINUSE':
+            console.error(bind + 'already use');
+            process.exit(1);
+            break;
+
+        default:
+            throw error
+    }
+} ;
+
 
 
 
