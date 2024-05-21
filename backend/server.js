@@ -1,9 +1,24 @@
-const http = require('http') ;
-const port = 3000 ;
+// import module
+const http = require('http');
+const app = require('./app');
+const { error } = require('console');
 
-const server = http.createServer((req, res)=> {
-    res.end('you have create your server') 
-}) ;
+// normalize port
+const normalizePort = val => {
+    const port = parseInt(val, 10);
 
-server.listen(process.env.PORT || port) ;
-console.log('server is listen on port', port);
+    if (isNaN(port)) {
+        return val;
+    }
+    if (port >= 0) {
+        return port;
+    }
+    return false;
+};
+
+
+
+
+
+
+
