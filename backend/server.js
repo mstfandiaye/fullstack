@@ -45,6 +45,18 @@ const errorHandler = error => {
     }
 } ;
 
+// create HTTP server 
+const server = http.createServer(app);
+
+//event manage on the server 
+server.on(error, errorHandler) ;
+server.on('listening', ()=>{
+    const adress = server.adress() ;
+    const bind = typeof adress === 'string' ? 'pipe' + adress : 'port' + port ;
+    console.log('listened on' + bind)
+})
+
+server.listen(port) ;
 
 
 
